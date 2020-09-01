@@ -1,6 +1,7 @@
 ---
 title: A little something to get you started
 published: true
+tags: Hacker101
 ---
 
 ## Flag 0
