@@ -2,17 +2,17 @@ email:
   id: 'piotr.kontowicz97@gmail.com'
   href: 'mailto:'
   title: 'Email'
-  fa-icon: 'fa-envelope-square'
+  fa-icon: 'fa-envelope-square fa-2x'
 
 twitter:
   id: 'Piotr13468454'
   href: 'https://www.twitter.com/'
   title: 'Twitter'
-  fa-icon: 'fa-twitter-square'
+  fa-icon: 'fa-twitter-square fa-2x'
 
 github:
   id: 'Kontowicz'
   href: 'https://github.com/'
   title: 'GitHub'
-  fa-icon: 'fa-github-square'
+  fa-icon: 'fa-github-square fa-2x'
 

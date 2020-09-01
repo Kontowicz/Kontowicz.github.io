@@ -14,7 +14,7 @@ tags: Hacker101
 
 ### Initial page
 
-![]({{ site.data_dir }}/{{ page.title | downcase | replace: ' ','-'}}/initial_page.png)
+![](/assets/{{ page.title | downcase | replace: ' ','-'}}/initial_page.png)
 
 Right click, view page source, result: 
 ```html
@@ -41,4 +41,4 @@ http://35.227.24.107/f642e8efd2/background.png
 
 flag is displayed on this link. 
 
-![]({{ site.data_dir }}/{{ page.title | downcase | replace: ' ','-'}}/flag.png)
+![](/assets/{{ page.title | downcase | replace: ' ','-'}}/flag.png)

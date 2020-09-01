@@ -6,7 +6,7 @@ author:
   url: "https://kontowicz.github.io"
 
 baseurl: /
-data_dir: "https://raw.githubusercontent.com/Kontowicz/kontowicz.github.io/master/_data/"
+
 source: .
 destination: ./_site
 permalink: /:title
