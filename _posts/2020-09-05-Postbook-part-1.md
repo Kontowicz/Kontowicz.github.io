@@ -9,7 +9,7 @@ tags: Hacker101
 #### Hits:
 * The person with username "user" has a very easy password...
 
-I just manually was trying few very common passwords. Do it by your own.
+I just manually tried a few very common passwords. Do it on your own.
 ![Flag](/assets/postbook/flag0/flag.png)
 
 
@@ -31,11 +31,11 @@ Just have some fun with id param in URL.
 I do that:
 ![Form inspection](/assets/postbook/flag2/form.png)
 
-and very interesting is highlighted hidden field. I change that value, and next flag has been displayed.
+and very interesting is the highlighted hidden field. I change that value, and the next flag has been displayed.
 
 ![Form inspection](/assets/postbook/flag2/flag.png)
 
-By this value post author is identified. So it is possible to easily submit post as someone else, just by changing that value.
+By this value, the post author is identified. So it is possible to easily submit a post as someone else, just by changing that value.
 
 * * *
 

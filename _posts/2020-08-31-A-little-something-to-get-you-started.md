@@ -33,12 +33,12 @@ Right click, view page source, result:
 </html>
 ```
 
-Image background.png is not visible on base page. Any hidden resource on the page is interesting, let's check it out. Go to:
+Image background.png is not visible on the base page. Any hidden resource on the page is interesting, let's check it out. Go to:
 
 ```
 http://35.227.24.107/f642e8efd2/background.png
 ```
 
-flag is displayed on this link. 
+the flag is displayed on this link. 
 
 ![](/assets/{{ page.title | downcase | replace: ' ','-'}}/flag.png)

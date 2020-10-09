@@ -10,7 +10,7 @@ tags: Hacker101
 
 * You can edit your own posts, what about someone else's?
 
-Firstly create new post, then edit that post. After that change id value in URL to 2. Then modify that post (that post is owned by admin), and save it. Flag will should be displayed on the screen.
+Firstly create a new post, then edit that post. After that change id value in URL to 2. Then modify that post (that post is owned by admin), and save it. Flag will should be displayed on the screen.
 
 ![Flag](/assets/postbook/flag4/flag.png)
 
@@ -29,7 +29,7 @@ My cookie value is:
 ```
 eccbc87e4b5ce2fe28308fd9f2a7baf3
 ```
-I search that value in google, and get many results  connected to md5. So maybe cookie is just md5 hash of user id? Let's check that:
+I searched for that value in google, and get many results  connected to md5. Maybe the cookie is just an md5 hash of user id? Let's check that:
 ```
 md5(1)=c4ca4238a0b923820dcc509a6f75849b
 ```
@@ -46,6 +46,6 @@ then just swap cookie value, and refresh page, next flag to the collection.
 
 ![Cookie](/assets/postbook/flag6/post_id.png)
 
-Just change it, it is an md5 hash. More about that case is write in flag 5. That task is very similar to previous.
+Just change it, it is an md5 hash. More about that case is written in flag 5. That task is very similar to previous.
 
 ![Flag](/assets/postbook/flag6/flag.png)

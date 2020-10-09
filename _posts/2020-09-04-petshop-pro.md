@@ -29,11 +29,11 @@ Then I modified price in burp and forward request to the server, after that flag
 * Tools may help you find the entrypoint
 * Tools are also great for finding credentials
 
-First hint gives me an idea to enumerate few popular page names as login, admin etc. And in that way I found login page:
+First hint gives me an idea to enumerate a few popular page names as login, admin etc. And in that way I found login page:
 
 ![New post](/assets/{{ page.title | downcase | replace: ' ','-'}}/flag1/login_page.png)
 
-First thing I was trying is few common usernames and logins, but they didn't work. I was trying to bypass login step, but I wasn't able to do that. So I decided to brute force credentials. To do that I was using  [Turbo Instuder](https://github.com/portswigger/turbo-intruder), it's an extension to burp.
+First thing I tried was a few common usernames and logins, but they didn't work. I was trying to bypass the login step, but I wasn't able to do that. So I decided to brute force credentials. To do that I was using [Turbo Instuder](https://github.com/portswigger/turbo-intruder), it's an extension to burp.
 
 Solution step by step:
 1. Intercept login request in burp:

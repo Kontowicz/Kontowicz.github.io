@@ -11,11 +11,11 @@ tags: Hacker101
 * Encodings like base64 often need to be modified for URLs. Thanks, HTTP
 * What is stopping you from modifying the data? Not having the key is no excuse
 
-I created new post. After submitting post in address bar appears new url with param. I modified this value, and that caused an error:
+I created a new post. After submitting a post in the address bar appears a new url with param. I modified this value, and that caused an error:
 
 ![Flag](assets/encrypted_pastebin/flag0/flag.png)
 
-flag is hidden in error message.
+the flag is hidden in an error message.
 
 * * * 
 
@@ -33,7 +33,7 @@ and points of crypto attacks lesson:
 
 ![Lesson content](assets/encrypted_pastebin/flag1/lesson.png)
 
-Based on error message and hints I found padding oracle error. This attack is time-consuming.
+Based on the error message and hints I found padding oracle error. This attack is time-consuming.
 
 Result of padBuster attack:
 ![Flag](assets/encrypted_pastebin/flag1/flag.png)

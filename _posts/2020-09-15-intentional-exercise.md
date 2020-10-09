@@ -11,7 +11,7 @@ tags: Hacker101
 * Is the link really broken?
 * Launching from another app might help
 
-After few minutes download apk file, and save it. Then convert it to .jar with following command:
+After a few minutes download the apk file, and save it. Then convert it to .jar with following command:
 ```
 d2j-dex2jar -f level13.apk
 ```
@@ -31,7 +31,7 @@ Go to Flag:
 
 ![Invalid request](assets/intentional_exercise/page_invalid.png)
 
-Nah, that would be too easy, there is nothing. I return to source code and read it carefully. After that I reconstruct final URL:
+Nah, that would be too easy, there is nothing. I return to the source code and read it carefully. After that I reconstruct final URL:
 
 ```
 http://34.94.3.143/fa8af62290/appRoot/flagBearer?&hash=8743a18df6861ced0b7d472b34278dc29abba81b3fa4cf836013426d6256bd5e

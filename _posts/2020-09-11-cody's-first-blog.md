@@ -15,7 +15,7 @@ First input:
 
 ![First input](assets/firstBlog/flag0/input.png)
 
-First I was trying with XSS. With second hints I use Wappalyzer to check what platform is running on. It use php 5.5.8 so I decide try to inject some php code.
+First I was trying with XSS. With second hints I use Wappalyzer to check what platform is running on. It uses php 5.5.8 so I decided to try to inject some php code.
 
 ![Payload](assets/firstBlog/flag0/pyaload.png)
 
