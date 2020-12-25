@@ -1,6 +1,6 @@
 ---
-title: Wargames - Natas
-published: fase 
+title: Wargames - Natas 1
+published: false 
 tags: game natas
 ---
 
